@@ -72,6 +72,7 @@ public class SysLoginService
         try
         {
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
+            // 在后面loadUserByUsername方法中的SysPermissionService.validate() 会需要用到Token中的username,password用来校验
             AuthenticationContextHolder.setContext(authenticationToken);
             // 该方法会去调用UserDetailsServiceImpl.loadUserByUsername
             authentication = authenticationManager.authenticate(authenticationToken);

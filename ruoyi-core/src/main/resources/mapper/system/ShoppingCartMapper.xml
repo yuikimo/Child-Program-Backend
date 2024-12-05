@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.ShoppingCartMapper">
+    
+    <resultMap type="ShoppingCart" id="ShoppingCartResult">
+        <result property="id"    column="shopping_cart_id"    />
+        <result property="uid"    column="shopping_cart_uid"    />
+        <result property="courseId"    column="shopping_cart_course_id"    />
+        <result property="title"    column="shopping_cart_title"    />
+        <result property="price"    column="shopping_cart_price"    />
+        <result property="count"    column="shopping_cart_count"    />
+    </resultMap>
+
+    <sql id="selectShoppingCartVo">
+        select shopping_cart_id, shopping_cart_uid, shopping_cart_course_id, shopping_cart_title, shopping_cart_price, shopping_cart_count from shopping_cart
+    </sql>
+
+    <select id="selectShoppingCartList" parameterType="ShoppingCart" resultMap="ShoppingCartResult">
+        <include refid="selectShoppingCartVo"/>
+        <where>  
+            <if test="uid != null "> and shopping_cart_uid = #{uid}</if>
+            <if test="courseId != null "> and shopping_cart_course_id = #{courseId}</if>
+            <if test="title != null  and title != ''"> and shopping_cart_title = #{title}</if>
+            <if test="price != null "> and shopping_cart_price = #{price}</if>
+            <if test="count != null "> and shopping_cart_count = #{count}</if>
+        </where>
+    </select>
+    
+    <select id="selectShoppingCartById" parameterType="Integer" resultMap="ShoppingCartResult">
+        <include refid="selectShoppingCartVo"/>
+        where shopping_cart_id = #{id}
+    </select>
+
+    <select id="selectShoppingCartByUidAndCid" resultMap="ShoppingCartResult">
+        <include refid="selectShoppingCartVo"/>
+        where
+            shopping_cart_uid = #{userId}
+        AND
+            shopping_cart_course_id = #{courseId}
+    </select>
+
+    <select id="selectShoppingCartListByUid" parameterType="long" resultMap="ShoppingCartResult">
+        <include refid="selectShoppingCartVo"/>
+        WHERE
+            shopping_cart_uid = #{userId}
+    </select>
+
+    <insert id="insertShoppingCart" parameterType="ShoppingCart" useGeneratedKeys="true" keyProperty="id">
+        insert into shopping_cart
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uid != null">shopping_cart_uid,</if>
+            <if test="courseId != null">shopping_cart_course_id,</if>
+            <if test="title != null">shopping_cart_title,</if>
+            <if test="price != null">shopping_cart_price,</if>
+            <if test="count != null">shopping_cart_count,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="uid != null">#{uid},</if>
+            <if test="courseId != null">#{courseId},</if>
+            <if test="title != null">#{title},</if>
+            <if test="price != null">#{price},</if>
+            <if test="count != null">#{count},</if>
+         </trim>
+    </insert>
+
+    <update id="updateShoppingCart" parameterType="ShoppingCart">
+        update shopping_cart
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="uid != null">shopping_cart_uid = #{uid},</if>
+            <if test="courseId != null">shopping_cart_course_id = #{courseId},</if>
+            <if test="title != null">shopping_cart_title = #{title},</if>
+            <if test="price != null">shopping_cart_price = #{price},</if>
+            <if test="count != null">shopping_cart_count = #{count},</if>
+        </trim>
+        where shopping_cart_id = #{id}
+    </update>
+
+    <delete id="deleteShoppingCartById" parameterType="Integer">
+        delete from shopping_cart where shopping_cart_id = #{id}
+    </delete>
+
+    <delete id="deleteShoppingCartByIds" parameterType="String">
+        delete from shopping_cart where shopping_cart_id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <delete id="deleteShoppingCarByIdAndUid">
+        DELETE
+        FROM
+            shopping_cart
+        WHERE
+            shopping_cart_id = #{id}
+        AND
+            shopping_cart_uid = #{userId}
+    </delete>
+</mapper>
