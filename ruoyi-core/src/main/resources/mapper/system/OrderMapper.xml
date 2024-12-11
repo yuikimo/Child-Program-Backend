@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.OrderMapper">
+    
+    <resultMap type="Order" id="OrderResult">
+        <result property="id"    column="id"    />
+        <result property="uid"    column="uid"    />
+        <result property="time"    column="time"    />
+        <result property="price"    column="price"    />
+        <result property="name"    column="name"    />
+        <result property="company"    column="company"    />
+        <result property="country"    column="country"    />
+        <result property="city"    column="city"    />
+        <result property="street1"    column="street1"    />
+        <result property="street2"    column="street2"    />
+        <result property="postal"    column="postal"    />
+        <result property="phone"    column="phone"    />
+        <result property="email"    column="email"    />
+        <result property="note"    column="note"    />
+    </resultMap>
+
+    <resultMap id="OrderOrderItemResult" type="Order" extends="OrderResult">
+        <collection property="orderItemList" ofType="OrderItem" column="id" select="selectOrderItemList" />
+    </resultMap>
+
+    <resultMap type="OrderItem" id="OrderItemResult">
+        <result property="id"    column="id"    />
+        <result property="orderId"    column="order_id"    />
+        <result property="title"    column="title"    />
+        <result property="price"    column="price"    />
+        <result property="count"    column="count"    />
+    </resultMap>
+
+    <sql id="selectOrderVo">
+        select id, uid, time, price, name, company, country, city, street1, street2, postal, phone, email, note from db_order
+    </sql>
+
+    <select id="selectOrderList" parameterType="Order" resultMap="OrderResult">
+        <include refid="selectOrderVo"/>
+        <where>  
+            <if test="uid != null "> and uid = #{uid}</if>
+            <if test="time != null "> and time = #{time}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="company != null  and company != ''"> and company = #{company}</if>
+            <if test="country != null  and country != ''"> and country = #{country}</if>
+            <if test="city != null  and city != ''"> and city = #{city}</if>
+            <if test="street1 != null  and street1 != ''"> and street1 = #{street1}</if>
+            <if test="street2 != null  and street2 != ''"> and street2 = #{street2}</if>
+            <if test="postal != null  and postal != ''"> and postal = #{postal}</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="email != null  and email != ''"> and email = #{email}</if>
+            <if test="note != null  and note != ''"> and note = #{note}</if>
+        </where>
+    </select>
+    
+    <select id="selectOrderById" parameterType="Long" resultMap="OrderOrderItemResult">
+        select id, uid, time, price, name, company, country, city, street1, street2, postal, phone, email, note
+        from db_order
+        where id = #{id}
+    </select>
+
+    <select id="selectOrderItemList" resultMap="OrderItemResult">
+        select id, order_id, title, price, count
+        from db_order_item
+        where order_id = #{order_id}
+    </select>
+
+    <select id="selectOrderListByUid" parameterType="Long" resultMap="OrderOrderItemResult">
+        <include refid="selectOrderVo"/>
+        WHERE uid = #{userId}
+    </select>
+
+    <insert id="insertOrder" parameterType="Order" useGeneratedKeys="true" keyProperty="id">
+        insert into db_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uid != null">uid,</if>
+            <if test="time != null">time,</if>
+            <if test="price != null">price,</if>
+            <if test="name != null">name,</if>
+            <if test="company != null">company,</if>
+            <if test="country != null">country,</if>
+            <if test="city != null">city,</if>
+            <if test="street1 != null">street1,</if>
+            <if test="street2 != null">street2,</if>
+            <if test="postal != null">postal,</if>
+            <if test="phone != null">phone,</if>
+            <if test="email != null">email,</if>
+            <if test="note != null">note,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="uid != null">#{uid},</if>
+            <if test="time != null">#{time},</if>
+            <if test="price != null">#{price},</if>
+            <if test="name != null">#{name},</if>
+            <if test="company != null">#{company},</if>
+            <if test="country != null">#{country},</if>
+            <if test="city != null">#{city},</if>
+            <if test="street1 != null">#{street1},</if>
+            <if test="street2 != null">#{street2},</if>
+            <if test="postal != null">#{postal},</if>
+            <if test="phone != null">#{phone},</if>
+            <if test="email != null">#{email},</if>
+            <if test="note != null">#{note},</if>
+         </trim>
+    </insert>
+
+    <update id="updateOrder" parameterType="Order">
+        update db_order
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="time != null">time = #{time},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="company != null">company = #{company},</if>
+            <if test="country != null">country = #{country},</if>
+            <if test="city != null">city = #{city},</if>
+            <if test="street1 != null">street1 = #{street1},</if>
+            <if test="street2 != null">street2 = #{street2},</if>
+            <if test="postal != null">postal = #{postal},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="note != null">note = #{note},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteOrderById" parameterType="Long">
+        delete from db_order where id = #{id}
+    </delete>
+
+    <delete id="deleteOrderByIds" parameterType="String">
+        delete from db_order where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+    <delete id="deleteOrderItemByOrderIds" parameterType="String">
+        delete from db_order_item where order_id in 
+        <foreach item="orderId" collection="array" open="(" separator="," close=")">
+            #{orderId}
+        </foreach>
+    </delete>
+
+    <delete id="deleteOrderItemByOrderId" parameterType="Long">
+        delete from db_order_item where order_id = #{orderId}
+    </delete>
+
+    <insert id="batchOrderItem">
+        insert into db_order_item( id, order_id, title, price, count) values
+        <foreach item="item" index="index" collection="list" separator=",">
+            ( #{item.id}, #{item.orderId}, #{item.title}, #{item.price}, #{item.count})
+        </foreach>
+    </insert>
+</mapper>

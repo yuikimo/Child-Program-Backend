@@ -3,6 +3,7 @@ package com.ruoyi.system.mapper;
 import java.util.List;
 
 import com.ruoyi.system.domain.ShoppingCart;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * 购物车商品Mapper接口
@@ -22,11 +23,11 @@ public interface ShoppingCartMapper {
     /**
      * 查询购物车商品
      *
-     * @param courseId 购物车商品主键
+     * @param cartId 购物车商品主键
      * @param userId   用户主键
      * @return 购物车商品
      */
-    public ShoppingCart selectShoppingCartByUidAndCid(Integer courseId, Long userId);
+    public ShoppingCart selectShoppingCartByUidAndCid(@Param("cartId") Integer cartId,@Param("userId") Long userId);
 
     /**
      * 查询用户购物车商品列表

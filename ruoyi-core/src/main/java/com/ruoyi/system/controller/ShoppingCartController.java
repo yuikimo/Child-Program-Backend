@@ -34,8 +34,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  */
 @RestController
 @RequestMapping("/system/cart")
-public class ShoppingCartController extends BaseController
-{
+public class ShoppingCartController extends BaseController {
     @Autowired
     private IShoppingCartService shoppingCartService;
 
@@ -47,8 +46,7 @@ public class ShoppingCartController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('system:cart:list')")
     @GetMapping("/list")
-    public TableDataInfo list(ShoppingCart shoppingCart)
-    {
+    public TableDataInfo list(ShoppingCart shoppingCart) {
         startPage();
         List<ShoppingCart> list = shoppingCartService.selectShoppingCartList(shoppingCart);
         return getDataTable(list);
@@ -60,8 +58,7 @@ public class ShoppingCartController extends BaseController
     @PreAuthorize("@ss.hasPermi('system:cart:export')")
     @Log(title = "购物车商品", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, ShoppingCart shoppingCart)
-    {
+    public void export(HttpServletResponse response, ShoppingCart shoppingCart) {
         List<ShoppingCart> list = shoppingCartService.selectShoppingCartList(shoppingCart);
         ExcelUtil<ShoppingCart> util = new ExcelUtil<ShoppingCart>(ShoppingCart.class);
         util.exportExcel(response, list, "购物车商品数据");
@@ -72,8 +69,7 @@ public class ShoppingCartController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('system:cart:query')")
     @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") Integer id)
-    {
+    public AjaxResult getInfo(@PathVariable("id") Integer id) {
         return success(shoppingCartService.selectShoppingCartById(id));
     }
 
@@ -83,8 +79,7 @@ public class ShoppingCartController extends BaseController
     @PreAuthorize("@ss.hasPermi('system:cart:add')")
     @Log(title = "购物车商品", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody ShoppingCart shoppingCart)
-    {
+    public AjaxResult add(@RequestBody ShoppingCart shoppingCart) {
         return toAjax(shoppingCartService.insertShoppingCart(shoppingCart));
     }
 
@@ -94,8 +89,7 @@ public class ShoppingCartController extends BaseController
     @PreAuthorize("@ss.hasPermi('system:cart:edit')")
     @Log(title = "购物车商品", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody ShoppingCart shoppingCart)
-    {
+    public AjaxResult edit(@RequestBody ShoppingCart shoppingCart) {
         return toAjax(shoppingCartService.updateShoppingCart(shoppingCart));
     }
 
@@ -105,8 +99,7 @@ public class ShoppingCartController extends BaseController
     @PreAuthorize("@ss.hasPermi('system:cart:remove')")
     @Log(title = "购物车商品", businessType = BusinessType.DELETE)
     @DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable Integer[] ids)
-    {
+    public AjaxResult remove(@PathVariable Integer[] ids) {
         return toAjax(shoppingCartService.deleteShoppingCartByIds(ids));
     }
 
@@ -116,11 +109,12 @@ public class ShoppingCartController extends BaseController
     @PostMapping("/add/{courseId}")
     public AjaxResult addByUser(@PathVariable Integer courseId) {
         Course course = courseService.selectCourseById(courseId);
-        if(course == null)
+        if (course == null) {
             return toAjax(false);
+        }
         Long userId = SecurityUtils.getUserId();
         ShoppingCart shoppingCart = shoppingCartService.selectShoppingCartByUidAndCid(courseId, userId);
-        if(shoppingCart == null) {
+        if (shoppingCart == null) {
             shoppingCart = new ShoppingCart();
             shoppingCart.setUid(Math.toIntExact(userId));
             shoppingCart.setPrice(new BigDecimal(course.getPrice()));
@@ -128,7 +122,7 @@ public class ShoppingCartController extends BaseController
             shoppingCart.setCourseId(courseId);
             shoppingCart.setCount(1);
             shoppingCartService.insertShoppingCart(shoppingCart);
-        }else {
+        } else {
             shoppingCart.setCount(shoppingCart.getCount() + 1);
             shoppingCartService.updateShoppingCart(shoppingCart);
         }
@@ -152,6 +146,7 @@ public class ShoppingCartController extends BaseController
 
     @PutMapping("/increase/{id}")
     public AjaxResult increase(@PathVariable Integer id) {
+        System.out.println("increaseId: "+ id);
         ShoppingCart shoppingCart = shoppingCartService.selectShoppingCartByUidAndCid(id, SecurityUtils.getUserId());
         shoppingCart.setCount(shoppingCart.getCount() + 1);
         return toAjax(shoppingCartService.updateShoppingCart(shoppingCart));
@@ -161,7 +156,7 @@ public class ShoppingCartController extends BaseController
     public AjaxResult decrease(@PathVariable Integer id) {
         ShoppingCart shoppingCart = shoppingCartService.selectShoppingCartByUidAndCid(id, SecurityUtils.getUserId());
         Integer count = shoppingCart.getCount();
-        if(count <= 1) {
+        if (count <= 1) {
             return toAjax(shoppingCartService.deleteShoppingCarByIdAndUid(id, SecurityUtils.getUserId()));
         } else {
             shoppingCart.setCount(shoppingCart.getCount() - 1);

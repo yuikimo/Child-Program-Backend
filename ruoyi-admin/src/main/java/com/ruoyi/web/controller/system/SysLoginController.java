@@ -70,6 +70,7 @@ public class SysLoginController
         Set<String> roles = permissionService.getRolePermission(user);
         // 权限集合
         Set<String> permissions = permissionService.getMenuPermission(user);
+        // 如果用户之前的权限集合和访问菜单的权限集合不一致 -> 用户的权限集合被修改了 -> 重新设置用户的权限集合并刷新Token
         if (!loginUser.getPermissions().equals(permissions))
         {
             loginUser.setPermissions(permissions);

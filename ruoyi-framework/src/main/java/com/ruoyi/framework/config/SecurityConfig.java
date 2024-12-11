@@ -73,7 +73,9 @@ public class SecurityConfig
     public AuthenticationManager authenticationManager()
     {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+        // 设置UserDetailsService用我们自己封装好的
         daoAuthenticationProvider.setUserDetailsService(userDetailsService);
+        // 设置加密算法
         daoAuthenticationProvider.setPasswordEncoder(bCryptPasswordEncoder());
         return new ProviderManager(daoAuthenticationProvider);
     }
@@ -115,7 +117,8 @@ public class SecurityConfig
                     // 静态资源，可匿名访问
                     .requestMatchers(HttpMethod.GET, "/", "/*.html", "/**.html", "/**.css", "/**.js", "/profile/**").permitAll()
                     .requestMatchers("/swagger-ui.html", "/v3/api-docs/**", "/swagger-ui/**", "/druid/**").permitAll()
-                    .requestMatchers("/system/course/**").permitAll()
+                    .requestMatchers("/system/course/**","/system/teacher/**","/system/advice/**","/system/event/**").permitAll()
+                    .requestMatchers("/system/blog/**","/system/detail/**").permitAll()
                     // 除上面外的所有请求全部需要鉴权认证
                     .anyRequest().authenticated();
             })

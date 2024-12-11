@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.BlogMapper">
+    
+    <resultMap type="Blog" id="BlogResult">
+        <result property="id"    column="id"    />
+        <result property="title"    column="title"    />
+        <result property="description"    column="description"    />
+        <result property="author"    column="author"    />
+        <result property="time"    column="time"    />
+    </resultMap>
+
+    <resultMap id="BlogBlogDetailResult" type="Blog" extends="BlogResult">
+        <collection property="blogDetailList" ofType="BlogDetail" column="id" select="selectBlogDetailList" />
+    </resultMap>
+
+    <resultMap type="BlogDetail" id="BlogDetailResult">
+        <result property="id"    column="id"    />
+        <result property="content"    column="content"    />
+        <result property="teacherId"    column="teacher_id"    />
+        <result property="teacherComment"    column="teacher_comment"    />
+    </resultMap>
+
+    <sql id="selectBlogVo">
+        select id, title, description, author, time from db_blog
+    </sql>
+
+    <select id="selectBlogList" parameterType="Blog" resultMap="BlogResult">
+        <include refid="selectBlogVo"/>
+        <where>  
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="description != null  and description != ''"> and description = #{description}</if>
+            <if test="author != null  and author != ''"> and author = #{author}</if>
+            <if test="time != null "> and time = #{time}</if>
+        </where>
+    </select>
+    
+    <select id="selectBlogById" parameterType="Long" resultMap="BlogBlogDetailResult">
+        select id, title, description, author, time
+        from db_blog
+        where id = #{id}
+    </select>
+
+    <select id="selectBlogDetailList" resultMap="BlogDetailResult">
+        select id, content, teacher_id, teacher_comment
+        from db_blog_detail
+        where id = #{id}
+    </select>
+
+    <insert id="insertBlog" parameterType="Blog" useGeneratedKeys="true" keyProperty="id">
+        insert into db_blog
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title != null">title,</if>
+            <if test="description != null">description,</if>
+            <if test="author != null">author,</if>
+            <if test="time != null">time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="title != null">#{title},</if>
+            <if test="description != null">#{description},</if>
+            <if test="author != null">#{author},</if>
+            <if test="time != null">#{time},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBlog" parameterType="Blog">
+        update db_blog
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null">title = #{title},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="author != null">author = #{author},</if>
+            <if test="time != null">time = #{time},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteBlogById" parameterType="Long">
+        delete from db_blog where id = #{id}
+    </delete>
+
+    <delete id="deleteBlogByIds" parameterType="String">
+        delete from db_blog where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+    <delete id="deleteBlogDetailByIds" parameterType="String">
+        delete from db_blog_detail where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <delete id="deleteBlogDetailById" parameterType="Long">
+        delete from db_blog_detail where id = #{id}
+    </delete>
+
+    <insert id="batchBlogDetail">
+        insert into db_blog_detail( id, content, teacher_id, teacher_comment) values
+        <foreach item="item" index="index" collection="list" separator=",">
+            ( #{item.id}, #{item.content}, #{item.teacherId}, #{item.teacherComment})
+        </foreach>
+    </insert>
+</mapper>

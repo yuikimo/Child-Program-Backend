@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.AdviceMapper">
+    
+    <resultMap type="Advice" id="AdviceResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="email"    column="email"    />
+        <result property="phone"    column="phone"    />
+        <result property="message"    column="message"    />
+        <result property="time"    column="time"    />
+        <result property="ip"    column="ip"    />
+    </resultMap>
+
+    <sql id="selectAdviceVo">
+        select id, name, email, phone, message, time, ip from db_advice
+    </sql>
+
+    <select id="selectAdviceList" parameterType="Advice" resultMap="AdviceResult">
+        <include refid="selectAdviceVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="email != null  and email != ''"> and email = #{email}</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="message != null  and message != ''"> and message = #{message}</if>
+            <if test="time != null "> and time = #{time}</if>
+            <if test="ip != null  and ip != ''"> and ip = #{ip}</if>
+        </where>
+    </select>
+    
+    <select id="selectAdviceById" parameterType="Long" resultMap="AdviceResult">
+        <include refid="selectAdviceVo"/>
+        where id = #{id}
+    </select>
+
+    <select id="selectAdviceByIpAddress" parameterType="string" resultMap="AdviceResult">
+        <include refid="selectAdviceVo"/>
+        where ip = #{ip} AND
+        DATE(time) = CURDATE()
+    </select>
+
+    <insert id="insertAdvice" parameterType="Advice" useGeneratedKeys="true" keyProperty="id">
+        insert into db_advice
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">name,</if>
+            <if test="email != null">email,</if>
+            <if test="phone != null">phone,</if>
+            <if test="message != null">message,</if>
+            <if test="time != null">time,</if>
+            <if test="ip != null">ip,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">#{name},</if>
+            <if test="email != null">#{email},</if>
+            <if test="phone != null">#{phone},</if>
+            <if test="message != null">#{message},</if>
+            <if test="time != null">#{time},</if>
+            <if test="ip != null">#{ip},</if>
+         </trim>
+    </insert>
+
+    <update id="updateAdvice" parameterType="Advice">
+        update db_advice
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name = #{name},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="message != null">message = #{message},</if>
+            <if test="time != null">time = #{time},</if>
+            <if test="ip != null">ip = #{ip},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteAdviceById" parameterType="Long">
+        delete from db_advice where id = #{id}
+    </delete>
+
+    <delete id="deleteAdviceByIds" parameterType="String">
+        delete from db_advice where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

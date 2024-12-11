@@ -29,7 +29,7 @@ public class SysPermissionService
 
     /**
      * 获取角色数据权限
-     * 
+     * 如果是管理员直接返回管理员权限否则从数据库中查找该用户角色的全部权限
      * @param user 用户信息
      * @return 角色权限信息
      */
@@ -70,14 +70,17 @@ public class SysPermissionService
                 // 多角色设置permissions属性，以便数据权限匹配权限
                 for (SysRole role : roles)
                 {
+                    // 如果当前角色状态为正常状态
                     if (StringUtils.equals(role.getStatus(), UserConstants.ROLE_NORMAL))
                     {
+                        // 查找角色的菜单权限集合
                         Set<String> rolePerms = menuService.selectMenuPermsByRoleId(role.getRoleId());
                         role.setPermissions(rolePerms);
                         perms.addAll(rolePerms);
                     }
                 }
             }
+            // 如果用户没有分配角色 -> 根据用户的ID来查找菜单权限
             else
             {
                 perms.addAll(menuService.selectMenuPermsByUserId(user.getUserId()));

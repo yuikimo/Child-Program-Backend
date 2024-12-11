@@ -34,6 +34,12 @@ public class UserDetailsServiceImpl implements UserDetailsService
     @Autowired
     private SysPermissionService permissionService;
 
+    /**
+     * 校验用户名或密码并返回UserDetails对象
+     * @param username 用户名
+     * @return 自己封装的UserDetails对象
+     * @throws UsernameNotFoundException
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
     {

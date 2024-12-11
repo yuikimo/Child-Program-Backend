@@ -57,13 +57,13 @@ public class ShoppingCartServiceImpl implements IShoppingCartService {
     /**
      * 查询购物车商品
      *
-     * @param courseId 购物车商品主键
+     * @param cartId 购物车商品主键
      * @param userId   用户主键
      * @return 购物车商品
      */
     @Override
-    public ShoppingCart selectShoppingCartByUidAndCid(Integer courseId, Long userId) {
-        return shoppingCartMapper.selectShoppingCartByUidAndCid(courseId, userId);
+    public ShoppingCart selectShoppingCartByUidAndCid(Integer cartId, Long userId) {
+        return shoppingCartMapper.selectShoppingCartByUidAndCid(cartId, userId);
     }
 
     /**

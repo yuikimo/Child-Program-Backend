@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.EventMapper">
+    
+    <resultMap type="Event" id="EventResult">
+        <result property="id"    column="id"    />
+        <result property="title"    column="title"    />
+        <result property="location"    column="location"    />
+        <result property="startTime"    column="start_time"    />
+        <result property="endTime"    column="end_time"    />
+    </resultMap>
+
+    <sql id="selectEventVo">
+        select id, title, location, start_time, end_time from db_event
+    </sql>
+
+    <select id="selectEventList" parameterType="Event" resultMap="EventResult">
+        <include refid="selectEventVo"/>
+        <where>  
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="location != null  and location != ''"> and location = #{location}</if>
+            <if test="startTime != null "> and start_time = #{startTime}</if>
+            <if test="endTime != null "> and end_time = #{endTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectEventById" parameterType="Long" resultMap="EventResult">
+        <include refid="selectEventVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertEvent" parameterType="Event" useGeneratedKeys="true" keyProperty="id">
+        insert into db_event
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title != null">title,</if>
+            <if test="location != null">location,</if>
+            <if test="startTime != null">start_time,</if>
+            <if test="endTime != null">end_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="title != null">#{title},</if>
+            <if test="location != null">#{location},</if>
+            <if test="startTime != null">#{startTime},</if>
+            <if test="endTime != null">#{endTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateEvent" parameterType="Event">
+        update db_event
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null">title = #{title},</if>
+            <if test="location != null">location = #{location},</if>
+            <if test="startTime != null">start_time = #{startTime},</if>
+            <if test="endTime != null">end_time = #{endTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteEventById" parameterType="Long">
+        delete from db_event where id = #{id}
+    </delete>
+
+    <delete id="deleteEventByIds" parameterType="String">
+        delete from db_event where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

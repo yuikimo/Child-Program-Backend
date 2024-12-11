@@ -26,6 +26,9 @@ public class ResourcesConfig implements WebMvcConfigurer
     @Autowired
     private RepeatSubmitInterceptor repeatSubmitInterceptor;
 
+    /**
+     * 通过对静态资源的的映射，我们可以用url直接访问本地服务器上指定路径的资源
+     */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry)
     {
@@ -40,6 +43,7 @@ public class ResourcesConfig implements WebMvcConfigurer
     }
 
     /**
+     * 添加拦截器
      * 自定义拦截规则
      */
     @Override
@@ -49,6 +53,7 @@ public class ResourcesConfig implements WebMvcConfigurer
     }
 
     /**
+     * 添加跨域拦截器
      * 跨域配置
      */
     @Bean

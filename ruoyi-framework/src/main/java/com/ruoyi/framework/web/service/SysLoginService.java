@@ -97,7 +97,7 @@ public class SysLoginService
         AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_SUCCESS, MessageUtils.message("user.login.success")));
         LoginUser loginUser = (LoginUser) authentication.getPrincipal();
         recordLoginInfo(loginUser.getUserId());
-        // 生成token
+        // 生成token -> 后续在访问接口时，会解析Token并封装为Authentication存储到SecurityContextHolder中
         return tokenService.createToken(loginUser);
     }
 
@@ -111,6 +111,7 @@ public class SysLoginService
      */
     public void validateCaptcha(String username, String code, String uuid)
     {
+        // 查看是否开启了验证码功能
         boolean captchaEnabled = configService.selectCaptchaEnabled();
         if (captchaEnabled)
         {

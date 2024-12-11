@@ -35,10 +35,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectShoppingCartByUidAndCid" resultMap="ShoppingCartResult">
         <include refid="selectShoppingCartVo"/>
-        where
+        WHERE
             shopping_cart_uid = #{userId}
         AND
-            shopping_cart_course_id = #{courseId}
+            shopping_cart_id = #{cartId}
     </select>
 
     <select id="selectShoppingCartListByUid" parameterType="long" resultMap="ShoppingCartResult">
