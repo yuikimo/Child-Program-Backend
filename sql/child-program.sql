@@ -11,7 +11,7 @@
  Target Server Version : 80032
  File Encoding         : 65001
 
- Date: 12/12/2024 12:57:47
+ Date: 17/12/2024 13:19:23
 */
 
 SET NAMES utf8mb4;
@@ -32,12 +32,17 @@ CREATE TABLE `course`  (
   `course_duration` int NULL DEFAULT NULL,
   `course_max_students` int NULL DEFAULT NULL,
   PRIMARY KEY (`course_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of course
 -- ----------------------------
 INSERT INTO `course` VALUES (1, 'jane cooper', 'Javascript 入门基础', '针对于少儿录制的Javascript学习课程（含基础操作与常用工具使用），建议少儿学习，非商业化！', '1.以文档制作水准角度评价，从程序员审美标准来看，布局与交互都是高质量的；\n2.以教学效果角度评价，比起传统敲代码方式，更加的精简、高效与易懂；\n3.涉及基本语法与组件知识的讲解与使用，点到即止，适合选手，否则会显得枯燥乏味；\n4.再结合老师面面俱到的协同讲解，确实是我见过最精美的教程了，没有之一。', 56, 199, 1926, 30);
+INSERT INTO `course` VALUES (2, '牛马讲师', 'C语言从入门到入土', '学习从C语言从入门到入土的基础课程', '牛马讲师力作', 1, 299, 1890, 30);
+INSERT INTO `course` VALUES (3, '牛魔讲师', 'Python语言从入门到入土', '学习Python语言从入门到入土', '无数学生推荐经典作品', 1, 199, 380, 30);
+INSERT INTO `course` VALUES (4, 'jane cooper', 'Html 语言基础学习', '学习Html语言基础', '前端三大件入门基础课程', 1, 188, 480, 40);
+INSERT INTO `course` VALUES (5, 'jane cooper', 'Css语言基础学习', '学习前端三件套Css语言基础学习', '经典力作', 1, 275, 580, 30);
+INSERT INTO `course` VALUES (6, 'jane cooper', '教你如何从入门Vue.Js到入坑', '学习Vue.Js基础课', '牛马讲师推荐作品', 1, 277, 360, 30);
 
 -- ----------------------------
 -- Table structure for db_advice
@@ -94,7 +99,7 @@ CREATE TABLE `db_blog_detail`  (
 -- Records of db_blog_detail
 -- ----------------------------
 INSERT INTO `db_blog_detail` VALUES (1, '<strong>2017年秋天――17岁时被卡车撞到，并在此后17年间昏睡不醒的舅舅醒了。前往病房探望的外甥敬文看到的是，口中嘟囔着莫名其妙的话语，从奇幻世界「格兰巴哈马尔」回到现实世界的舅舅。……舅舅的脑子不太对劲。见到此状敬文无言以对，但舅舅说要展示去过奇幻世界的证据并用出了魔法。敬文打算靠舅舅的力量换取钱财来过日子，便收留了无家可归的舅舅开始了合租生活。在与舅舅共度的生活中，舅舅不断说着在奇幻世界的冒险故事和对世嘉满溢而出的热爱。舅舅这半辈子充满了孤独和残酷，听得敬文时而开心时而痛心。这是努力做视频的两个年龄相差悬殊的男人，在廉租房区的一角展开的，崭新异世界喜剧！</strong>', 1, '异世界舅舅');
-INSERT INTO `db_blog_detail` VALUES (2, '&lt;div class=\"block-card relative\"&gt;                                    &lt;blockquote&gt;                                        &lt;p&gt;                                            There are many variations of passages of Lorem Ipsum available, but the                                            majority have suffered strike out text alteration in some form, by injected                                            humour,                                            or randomised words which don’t look even slightly believable.                                        &lt;/p&gt;                                    &lt;/blockquote&gt;                                    &lt;div class=\"block-icon\"&gt;                                        &lt;i class=\"icon-quote-right\"&gt;&lt;/i&gt;                                    &lt;/div&gt;                                &lt;/div&gt;', 1, '就读于东京都内私立高中的一年级学生护郎，既没有「希望」、「梦想」，也没有「野心」。 世界对于他来说是「无关紧要」的东西，一边对同班同学穗花抱有淡淡的憧憬，一边和好友秋津丰过着一成不变的无聊的日常生活。');
+INSERT INTO `db_blog_detail` VALUES (2, '就读于东京都内私立高中的一年级学生护郎，既没有「希望」、「梦想」，也没有「野心」。 世界对于他来说是「无关紧要」的东西，一边对同班同学穗花抱有淡淡的憧憬，一边和好友秋津丰过着一成不变的无聊的日常生活。', 1, '就读于东京都内私立高中的一年级学生护郎，既没有「希望」、「梦想」，也没有「野心」。 世界对于他来说是「无关紧要」的东西，一边对同班同学穗花抱有淡淡的憧憬，一边和好友秋津丰过着一成不变的无聊的日常生活。');
 
 -- ----------------------------
 -- Table structure for db_event
@@ -107,7 +112,7 @@ CREATE TABLE `db_event`  (
   `start_time` datetime NULL DEFAULT NULL,
   `end_time` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of db_event
@@ -116,8 +121,8 @@ INSERT INTO `db_event` VALUES (1, '坑钱杯-Java类型', '101教室', '2024-12-
 INSERT INTO `db_event` VALUES (2, '坑钱杯-C类型', '102教室', '2024-12-06 08:00:00', '2024-12-06 13:23:00');
 INSERT INTO `db_event` VALUES (3, '坑钱杯-Python类型', '103教室', '2024-12-04 16:00:00', '2024-12-06 15:00:00');
 INSERT INTO `db_event` VALUES (4, '坑钱杯-Web类型', '105教室', '2024-12-02 00:00:00', '2024-12-04 00:00:00');
-INSERT INTO `db_event` VALUES (5, '牛马练习', '201', '2024-12-03 00:00:00', '2024-12-05 00:00:00');
-INSERT INTO `db_event` VALUES (6, '牛马大赛', '202', '2024-12-07 00:00:00', '2024-12-08 00:00:00');
+INSERT INTO `db_event` VALUES (5, '牛马练习', '201教室', '2024-12-03 00:00:00', '2024-12-05 00:00:00');
+INSERT INTO `db_event` VALUES (6, '牛马大赛', '202教室', '2024-12-07 00:00:00', '2024-12-08 00:00:00');
 
 -- ----------------------------
 -- Table structure for db_order
@@ -175,7 +180,7 @@ CREATE TABLE `db_teacher`  (
   `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
   `post` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of db_teacher
@@ -294,12 +299,14 @@ CREATE TABLE `shopping_cart`  (
   `shopping_cart_price` decimal(10, 2) NULL DEFAULT NULL,
   `shopping_cart_count` int NULL DEFAULT NULL,
   PRIMARY KEY (`shopping_cart_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of shopping_cart
 -- ----------------------------
-INSERT INTO `shopping_cart` VALUES (9, 101, 1, 'Javascript 入门基础', 199.00, 1);
+INSERT INTO `shopping_cart` VALUES (10, 101, 1, 'Javascript 入门基础', 199.00, 1);
+INSERT INTO `shopping_cart` VALUES (11, 101, 2, 'C语言从入门到入土', 299.00, 1);
+INSERT INTO `shopping_cart` VALUES (12, 101, 3, 'Python语言从入门到入土', 199.00, 1);
 
 -- ----------------------------
 -- Table structure for sys_config
@@ -517,7 +524,7 @@ CREATE TABLE `sys_logininfor`  (
   PRIMARY KEY (`info_id`) USING BTREE,
   INDEX `idx_sys_logininfor_s`(`status` ASC) USING BTREE,
   INDEX `idx_sys_logininfor_lt`(`login_time` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 156 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '系统访问记录' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 161 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '系统访问记录' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_logininfor
@@ -579,6 +586,27 @@ INSERT INTO `sys_logininfor` VALUES (153, 'admin', '127.0.0.1', '内网IP', 'Chr
 INSERT INTO `sys_logininfor` VALUES (154, 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2024-12-06 20:10:36');
 INSERT INTO `sys_logininfor` VALUES (155, 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2024-12-06 20:50:36');
 INSERT INTO `sys_logininfor` VALUES (156, 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2024-12-06 22:01:21');
+INSERT INTO `sys_logininfor` VALUES (157, 'admin', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2024-12-17 12:21:11');
+INSERT INTO `sys_logininfor` VALUES (158, 'user', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2024-12-17 12:44:02');
+INSERT INTO `sys_logininfor` VALUES (159, 'user', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '1', '验证码错误', '2024-12-17 12:45:59');
+INSERT INTO `sys_logininfor` VALUES (160, 'user', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2024-12-17 12:46:34');
+INSERT INTO `sys_logininfor` VALUES (161, 'user', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '退出成功', '2024-12-17 12:48:32');
+INSERT INTO `sys_logininfor` VALUES (162, 'user', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2024-12-17 12:48:39');
+INSERT INTO `sys_logininfor` VALUES (163, 'user', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2024-12-17 12:48:50');
+INSERT INTO `sys_logininfor` VALUES (164, 'user', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2024-12-17 12:51:28');
+INSERT INTO `sys_logininfor` VALUES (165, 'user', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '退出成功', '2024-12-17 12:51:58');
+INSERT INTO `sys_logininfor` VALUES (166, 'user', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2024-12-17 12:52:08');
+INSERT INTO `sys_logininfor` VALUES (167, 'user', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '退出成功', '2024-12-17 12:53:19');
+INSERT INTO `sys_logininfor` VALUES (168, 'user', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2024-12-17 12:53:29');
+INSERT INTO `sys_logininfor` VALUES (169, 'user', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '退出成功', '2024-12-17 12:56:13');
+INSERT INTO `sys_logininfor` VALUES (170, 'user', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2024-12-17 12:56:21');
+INSERT INTO `sys_logininfor` VALUES (171, 'user', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '退出成功', '2024-12-17 12:57:58');
+INSERT INTO `sys_logininfor` VALUES (172, 'user', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2024-12-17 12:58:05');
+INSERT INTO `sys_logininfor` VALUES (173, 'user', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '退出成功', '2024-12-17 13:01:07');
+INSERT INTO `sys_logininfor` VALUES (174, '123', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '注册成功', '2024-12-17 13:01:25');
+INSERT INTO `sys_logininfor` VALUES (175, '123', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2024-12-17 13:01:33');
+INSERT INTO `sys_logininfor` VALUES (176, '123', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '退出成功', '2024-12-17 13:13:22');
+INSERT INTO `sys_logininfor` VALUES (177, 'user', '127.0.0.1', '内网IP', 'Chrome 13', 'Windows 10', '0', '登录成功', '2024-12-17 13:13:30');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -606,7 +634,7 @@ CREATE TABLE `sys_menu`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT '' COMMENT '备注',
   PRIMARY KEY (`menu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2078 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '菜单权限表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2079 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '菜单权限表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_menu
@@ -790,7 +818,7 @@ CREATE TABLE `sys_oper_log`  (
   INDEX `idx_sys_oper_log_bt`(`business_type` ASC) USING BTREE,
   INDEX `idx_sys_oper_log_s`(`status` ASC) USING BTREE,
   INDEX `idx_sys_oper_log_ot`(`oper_time` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 275 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '操作日志记录' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 281 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '操作日志记录' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_oper_log
@@ -971,6 +999,12 @@ INSERT INTO `sys_oper_log` VALUES (272, '博客文章详情', 2, 'com.ruoyi.syst
 INSERT INTO `sys_oper_log` VALUES (273, '博客文章', 1, 'com.ruoyi.system.controller.BlogController.add()', 'POST', 1, 'admin', NULL, '/system/blog', '127.0.0.1', '内网IP', '{\"author\":\"牛马\",\"blogDetailList\":[{\"content\":\"\",\"id\":2,\"params\":{},\"teacherComment\":\"\",\"teacherId\":1}],\"description\":\"神明选拔\",\"id\":2,\"params\":{},\"time\":\"2024-12-12\",\"title\":\"KAMIERABI\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2024-12-06 21:01:29', 40);
 INSERT INTO `sys_oper_log` VALUES (274, '博客文章详情', 2, 'com.ruoyi.system.controller.BlogDetailController.edit()', 'PUT', 1, 'admin', NULL, '/system/detail', '127.0.0.1', '内网IP', '{\"content\":\"&lt;div class=\\\"course-details-content-area\\\"&gt;                                &lt;div class=\\\"course-bg-img mt-0\\\"&gt;                                    &lt;img src=\\\"img/bg-img/inner/course.png\\\" alt=\\\"\\\"&gt;                                &lt;/div&gt;                                &lt;div class=\\\"blog-details-header d-flex align-items-center\\\"&gt;                                    &lt;p&gt;&lt;i class=\\\"icon-user-2\\\"&gt;&lt;/i&gt; admin&lt;/p&gt;                                    &lt;p&gt;&lt;i class=\\\"icon-chat-bubble\\\"&gt;&lt;/i&gt; 0 comments&lt;/p&gt;                                    &lt;p&gt;&lt;i class=\\\"icon-clock-solid-1\\\"&gt;&lt;/i&gt; March 20, 2024&lt;/p&gt;                                &lt;/div&gt;                                &lt;p&gt;\\\"Edumastery has been an amazing experience for our daughter, Lily. The inclusive and                                    enriching atmosphere has not only helped her academic growth but has also fostered                                    her social and emotional development. We are grateful for the caring and dedicated                                    staff.\\\"&lt;/p&gt;                                &lt;div class=\\\"block-card relative\\\"&gt;                                    &lt;blockquote&gt;                                        &lt;p&gt;                                            There are many variations of passages of Lorem Ipsum available, but the                                            majority have suffered strike out text alteration in some form, by injected                                            humour,                                            or randomised words which don’t look even slightly believable.                                        &lt;/p&gt;                                    &lt;/blockquote&gt;                                    &lt;div class=\\\"block-icon\\\"&gt;                                        &lt;i class=\\\"icon-quote-right\\\"&gt;&lt;/i&gt;              ', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2024-12-06 21:02:24', 33);
 INSERT INTO `sys_oper_log` VALUES (275, '博客文章详情', 2, 'com.ruoyi.system.controller.BlogDetailController.edit()', 'PUT', 1, 'admin', NULL, '/system/detail', '127.0.0.1', '内网IP', '{\"content\":\"&lt;div class=\\\"block-card relative\\\"&gt;                                    &lt;blockquote&gt;                                        &lt;p&gt;                                            There are many variations of passages of Lorem Ipsum available, but the                                            majority have suffered strike out text alteration in some form, by injected                                            humour,                                            or randomised words which don’t look even slightly believable.                                        &lt;/p&gt;                                    &lt;/blockquote&gt;                                    &lt;div class=\\\"block-icon\\\"&gt;                                        &lt;i class=\\\"icon-quote-right\\\"&gt;&lt;/i&gt;                                    &lt;/div&gt;                                &lt;/div&gt;\",\"id\":2,\"params\":{},\"teacherComment\":\"就读于东京都内私立高中的一年级学生护郎，既没有「希望」、「梦想」，也没有「野心」。 世界对于他来说是「无关紧要」的东西，一边对同班同学穗花抱有淡淡的憧憬，一边和好友秋津丰过着一成不变的无聊的日常生活。\",\"teacherId\":1}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2024-12-06 21:03:53', 14);
+INSERT INTO `sys_oper_log` VALUES (276, '博客文章详情', 2, 'com.ruoyi.system.controller.BlogDetailController.edit()', 'PUT', 1, 'admin', NULL, '/system/detail', '127.0.0.1', '内网IP', '{\"content\":\"就读于东京都内私立高中的一年级学生护郎，既没有「希望」、「梦想」，也没有「野心」。 世界对于他来说是「无关紧要」的东西，一边对同班同学穗花抱有淡淡的憧憬，一边和好友秋津丰过着一成不变的无聊的日常生活。\",\"id\":2,\"params\":{},\"teacherComment\":\"就读于东京都内私立高中的一年级学生护郎，既没有「希望」、「梦想」，也没有「野心」。 世界对于他来说是「无关紧要」的东西，一边对同班同学穗花抱有淡淡的憧憬，一边和好友秋津丰过着一成不变的无聊的日常生活。\",\"teacherId\":1}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2024-12-17 12:22:11', 37);
+INSERT INTO `sys_oper_log` VALUES (277, '课程', 1, 'com.ruoyi.system.controller.CourseController.add()', 'POST', 1, 'admin', NULL, '/system/course', '127.0.0.1', '内网IP', '{\"about\":\"学习从C语言从入门到入土的基础课程\",\"description\":\"牛马讲师力作\",\"duration\":1890,\"id\":2,\"lesson\":1,\"maxStudents\":30,\"params\":{},\"price\":299,\"teacher\":\"牛马讲师\",\"title\":\"C语言从入门到入土\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2024-12-17 12:23:29', 34);
+INSERT INTO `sys_oper_log` VALUES (278, '课程', 1, 'com.ruoyi.system.controller.CourseController.add()', 'POST', 1, 'admin', NULL, '/system/course', '127.0.0.1', '内网IP', '{\"about\":\"学习Python语言从入门到入土\",\"description\":\"无数学生推荐经典作品\",\"duration\":380,\"id\":3,\"lesson\":1,\"maxStudents\":30,\"params\":{},\"price\":199,\"teacher\":\"牛魔讲师\",\"title\":\"Python语言从入门到入土\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2024-12-17 12:24:39', 20);
+INSERT INTO `sys_oper_log` VALUES (279, '课程', 1, 'com.ruoyi.system.controller.CourseController.add()', 'POST', 1, 'admin', NULL, '/system/course', '127.0.0.1', '内网IP', '{\"about\":\"学习Html语言基础\",\"description\":\"前端三大件入门基础课程\",\"duration\":480,\"id\":4,\"lesson\":1,\"maxStudents\":40,\"params\":{},\"price\":188,\"teacher\":\"jane cooper\",\"title\":\"Html 语言基础学习\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2024-12-17 12:25:30', 11);
+INSERT INTO `sys_oper_log` VALUES (280, '课程', 1, 'com.ruoyi.system.controller.CourseController.add()', 'POST', 1, 'admin', NULL, '/system/course', '127.0.0.1', '内网IP', '{\"about\":\"学习前端三件套Css语言基础学习\",\"description\":\"经典力作\",\"duration\":580,\"id\":5,\"lesson\":1,\"maxStudents\":30,\"params\":{},\"price\":275,\"teacher\":\"jane cooper\",\"title\":\"Css语言基础学习\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2024-12-17 12:26:25', 18);
+INSERT INTO `sys_oper_log` VALUES (281, '课程', 1, 'com.ruoyi.system.controller.CourseController.add()', 'POST', 1, 'admin', NULL, '/system/course', '127.0.0.1', '内网IP', '{\"about\":\"学习Vue.Js基础课\",\"description\":\"牛马讲师推荐作品\",\"duration\":360,\"id\":6,\"lesson\":1,\"maxStudents\":30,\"params\":{},\"price\":277,\"teacher\":\"jane cooper\",\"title\":\"教你如何从入门Vue.Js到入坑\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2024-12-17 12:28:09', 20);
 
 -- ----------------------------
 -- Table structure for sys_post
@@ -1018,7 +1052,7 @@ CREATE TABLE `sys_role`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`role_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 102 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '角色信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 103 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '角色信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_role
@@ -1082,14 +1116,15 @@ CREATE TABLE `sys_user`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 101 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '用户信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 102 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '用户信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, NULL, 'admin', '若依', '00', 'ry@163.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2024-12-06 22:01:21', 'admin', '2024-12-02 11:05:45', '', '2024-12-06 22:01:21', '管理员');
+INSERT INTO `sys_user` VALUES (1, NULL, 'admin', '若依', '00', 'ry@163.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2024-12-17 12:21:11', 'admin', '2024-12-02 11:05:45', '', '2024-12-17 12:21:11', '管理员');
 INSERT INTO `sys_user` VALUES (2, NULL, 'ry', '若依', '00', 'ry@qq.com', '15666666666', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '2', '127.0.0.1', '2024-12-02 11:05:45', 'admin', '2024-12-02 11:05:45', '', NULL, '测试员');
-INSERT INTO `sys_user` VALUES (101, NULL, 'user', 'user', '00', 'user123@qq.com', '15777777778', '1', '/profile/avatar/2024/12/06/20230315144957_83ea9.thumb.400_0_20241206151342A003.jpeg', '$2a$10$JzbKXJJcgbWYGKuwRPXRguyEfgD3JMk9dAZciJKKIWyZUBR25l2sq', '0', '0', '127.0.0.1', '2024-12-06 13:04:51', '', '2024-12-04 10:08:16', 'admin', '2024-12-06 15:12:53', NULL);
+INSERT INTO `sys_user` VALUES (101, NULL, 'user', 'user', '00', 'user123@qq.com', '15777777778', '1', '/profile/avatar/2024/12/06/20230315144957_83ea9.thumb.400_0_20241206151342A003.jpeg', '$2a$10$JzbKXJJcgbWYGKuwRPXRguyEfgD3JMk9dAZciJKKIWyZUBR25l2sq', '0', '0', '127.0.0.1', '2024-12-17 13:13:31', '', '2024-12-04 10:08:16', 'admin', '2024-12-17 13:13:30', NULL);
+INSERT INTO `sys_user` VALUES (102, NULL, '123', '123', '00', '', '', '0', '', '$2a$10$m6Vk6erHFAIB3ANQ36rfpuK52NObgPjhc3Ui5iJXGpGBQMrRUcRWu', '0', '0', '127.0.0.1', '2024-12-17 13:01:33', '', '2024-12-17 13:01:25', '', '2024-12-17 13:01:33', NULL);
 
 -- ----------------------------
 -- Table structure for sys_user_post
